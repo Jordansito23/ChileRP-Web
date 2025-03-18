@@ -3,112 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chile Roleplay Community</title>
+    <title>Chile Roleplay - Bienvenido</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: black;
-            color: white;
+            background: linear-gradient(45deg, #111, #ff8000);
             font-family: Arial, sans-serif;
+            color: white;
             text-align: center;
             overflow: hidden;
         }
+
         .container {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
+
         h1 {
             font-size: 3rem;
-            color: #FF8000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
+
         p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
         }
-        canvas {
-            position: absolute;
+
+        .animated-bg {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?city,night') no-repeat center center/cover;
+            filter: blur(10px);
             z-index: -1;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .btn {
+            background: #ff8000;
+            padding: 15px 30px;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #e06b00;
         }
     </style>
 </head>
 <body>
-    <canvas id="background"></canvas>
+    <div class="animated-bg"></div>
     <div class="container">
-        <h1>Bienvenido a Chile Roleplay Community</h1>
-        <p>El servidor de Roleplay más grande de Chile</p>
+        <img class="logo" src="https://via.placeholder.com/150" alt="Chile Roleplay Logo">
+        <h1>Bienvenido a Chile Roleplay</h1>
+        <p>El servidor de Roleplay más grande de Chile, donde la realidad se mezcla con la diversión.</p>
+        <button class="btn" onclick="window.location.href='https://https://discord.gg/EYmXRhVfUr'">Unirse al Discord</button>
     </div>
-
-    <script>
-        const canvas = document.getElementById("background");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-
-        class Particle {
-            constructor(x, y, size, speedX, speedY, color) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.speedX = speedX;
-                this.speedY = speedY;
-                this.color = color;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            for (let i = 0; i < 50; i++) {
-                const size = Math.random() * 4 + 1;
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const speedX = (Math.random() - 0.5) * 2;
-                const speedY = (Math.random() - 0.5) * 2;
-                const color = "#FF8000";
-                particles.push(new Particle(x, y, size, speedX, speedY, color));
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        window.addEventListener("resize", () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
 </body>
 </html>
